@@ -1,19 +1,61 @@
 from database.DB_connect import DBConnect
+from model.album import Album
+from model.connessione import Connessione
+from model.track import Track
+
 
 class DAO:
     @staticmethod
-    def query_esempio():
+    def read_all_albums():
         conn = DBConnect.get_connection()
 
         result = []
 
         cursor = conn.cursor(dictionary=True)
-        query = """ SELECT * FROM esempio """
+        query = """ SELECT * FROM album """
 
         cursor.execute(query)
 
         for row in cursor:
-            result.append(row)
+            result.append(Album(**row))
+
+        cursor.close()
+        conn.close()
+        return result
+
+    @staticmethod
+    def read_all_tracks():
+        conn = DBConnect.get_connection()
+
+        result = {}
+
+        cursor = conn.cursor(dictionary=True)
+        query = """ SELECT * FROM track """
+
+        cursor.execute(query)
+
+        for row in cursor:
+            track= (Track(**row))
+            result[track.id] = track
+
+
+        cursor.close()
+        conn.close()
+        return result
+
+    @staticmethod
+    def read_all_playlists_track():
+        conn = DBConnect.get_connection()
+
+        result = []
+
+        cursor = conn.cursor(dictionary=True)
+        query = """ SELECT * FROM playlist_track """
+
+        cursor.execute(query)
+
+        for row in cursor:
+            result.append(Connessione(**row))
 
         cursor.close()
         conn.close()

@@ -10,10 +10,29 @@ class Controller:
     def handle_crea_grafo(self, e):
         """ Handler per gestire creazione del grafo """""
         # TODO
+        try:
+            soglia= float(self._view.txt_durata.value)
+        except:
+            self._view.show_alert("Inserire un valore valido per la soglia")
+            return
 
-    def get_selected_album(self, e):
+        self._view.lista_visualizzazione_1.controls.clear()
+        self._model.crea_grafo(soglia_minuti=soglia)
+        self._view.lista_visualizzazione_1.controls.append(ft.Text(f"Grafo creato: {self._model.G.nodes} album, {self._model.G.edges} archi"))
+        self._view.update()
+
+
+
+
+
+    def get_selected_album(self, e, dd):
         """ Handler per gestire la selezione dell'album dal dropdown """""
         # TODO
+        albums= self._model.G.nodes
+        for a in albums:
+            dd.options.append(ft.dropdown.Option(key=a.title))
+
+
 
     def handle_analisi_comp(self, e):
         """ Handler per gestire l'analisi della componente connessa """""
