@@ -2,10 +2,10 @@ from dataclasses import dataclass
 @dataclass
 class Album:
     id : int
-    title : str
+    title: str
     artist_id : int
 
     def __str__(self):
-        return self.title
+        return f"{self.title} {self.artist_id}"
     def __hash__(self):
         return hash(self.id)
