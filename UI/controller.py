@@ -83,7 +83,7 @@ class Controller:
 
         durata_totale, set_album= self._model.get_percorso_ottimo(start, soglia)
 
-        self._view.lista_visualizzazione_3.controls.append(ft.Text(f"Set trovato: ({len(set_album)} album,  {durata_totale} minuti"))
+        self._view.lista_visualizzazione_3.controls.append(ft.Text(f"Set trovato: ({len(set_album)} album,  {durata_totale:.2f} minuti"))
         for a in self._model.sequenza_ottima:
             nome_album= a.title
             durata_album= self._model.dic_album_duration[a.id]
